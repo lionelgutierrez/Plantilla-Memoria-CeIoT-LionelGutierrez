@@ -38,55 +38,38 @@
   morecomment=[s]{/*}{*/}
 }
 
+Poner párrafo introductorio.
+
 
 %----------------------------------------------------------------------------------------
 %	SECTION 1
 %----------------------------------------------------------------------------------------
-\section{Análisis del software}
- 
-La idea de esta sección es resaltar los problemas encontrados, los criterios utilizados y la justificación de las decisiones que se hayan tomado.
+\section{Arquitectura del sistema/módulos}
 
-Se puede agregar código o pseudocódigo dentro de un entorno lstlisting con el siguiente código:
+Arquitectura del sistema. Separación en módulos/subsistemas. Protocolos de comunicación entre los módulos y escalabilidad.
 
-\begin{verbatim}
-\begin{lstlisting}[caption= "un epígrafe descriptivo"]
-	las líneas de código irían aquí...
-\end{lstlisting}
-\end{verbatim}
+\section{Detalle de módulos de Hardware}
 
-A modo de ejemplo:
+Detalle de los módulos del sistema y protocolos utilizados para la comunicación entre los mismos.
 
-\begin{lstlisting}[label=cod:vControl,caption=Pseudocódigo del lazo principal de control.]  % Start your code-block
+\subsection{Módulo sensor}
 
-#define MAX_SENSOR_NUMBER 3
-#define MAX_ALARM_NUMBER  6
-#define MAX_ACTUATOR_NUMBER 6
+Detalle de implementación del módulo de sensado/ingreso.
 
-uint32_t sensorValue[MAX_SENSOR_NUMBER];		
-FunctionalState alarmControl[MAX_ALARM_NUMBER];	//ENABLE or DISABLE
-state_t alarmState[MAX_ALARM_NUMBER];						//ON or OFF
-state_t actuatorState[MAX_ACTUATOR_NUMBER];			//ON or OFF
+\subsection{Módulo actuador}
 
-void vControl() {
+Detalle de implementación del módulo de actuación.
 
-	initGlobalVariables();
-	
-	period = 500 ms;
-		
-	while(1) {
+\section{Detalle de módulos de Software}
 
-		ticks = xTaskGetTickCount();
-		
-		updateSensors();
-		
-		updateAlarms();
-		
-		controlActuators();
-		
-		vTaskDelayUntil(&ticks, period);
-	}
-}
-\end{lstlisting}
+\subsection{Módulo de Backend}
 
+Detalle de implementación backend del sistema. Explicar por un lado la API Rest del sistema y  el detalle de implementación del middleware de autenticación (API de autenticación).
 
+\subsection{Módulo de Frontend}
 
+Detalle de implementación frontend del sistema.
+
+\section{Interfaz con sistema de documentación}
+
+Detalle de interfaz con sistema de documentación. Mock implementado para testeo integral del sistema.
