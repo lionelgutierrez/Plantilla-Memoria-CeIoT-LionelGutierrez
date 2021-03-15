@@ -13,11 +13,11 @@
 
 \section{Resultados obtenidos}
 
-Se logró cumplir el alcance y objetivo del proyecto. En primer lugar, se implementó el sistema de control solicitado, incluyendo los módulos de sensado y actuación y la aplicación web de gestión de control y alertas. En segundo lugar, se sentaron las bases para el agregado de futuros casos de uso, para lo cual se hizo un diseño modular. Esto permitirá al sistema el sensado de datos de nuevos procesos de planta, según el requerimiento 1.1, especificado en la sección 2.5.
+Se logró cumplir el alcance y objetivo del proyecto. En primer lugar, se implementó el sistema de control solicitado que incluyó la puesta en funcionamiento de un módulo sensor, un módulo actuador y una aplicación web para la gestión de tareas de control y de alertas. En segundo lugar, se sentaron las bases para el agregado de futuros casos de uso, para lo cual se hizo un diseño modular. Esto permitirá al sistema el sensado de datos de nuevos procesos de planta, según el requerimiento 1.1, especificado en la sección \ref{sec:Requerimientos}.
 
-Adicionalmente, se pudo incorporar al sistema un módulo para gestionar la autenticación y autorización de los usuarios y el acceso a la API Rest del Backend del sistema de modo seguro. Esto posibilitó cumplir con el requerimiento 1.6, que fue agregado al trabajo durante su desarrollo. Este requerimiento permite independizar al sistema desarrollado del sistema de autenticación de la empresa y lograr una mayor portabilidad, lo que da la posibilidad a futuro de expandir el mismo a otras empresas.
+Adicionalmente, se incorporó al sistema un módulo para gestionar la autenticación y autorización de los usuarios y el acceso a la API Rest del backend del sistema de modo seguro. Esto posibilitó cumplir con el requerimiento 1.6, que fue agregado al trabajo durante su desarrollo. Este requerimiento permite independizar al sistema desarrollado del sistema de autenticación de la empresa y lograr una mayor portabilidad, lo que le da la posibilidad a futuro de expandir el mismo a otras empresas.
 
-Finalmente, el trabajo cumplió con el requerimiento de lograr una gestión efectiva de los terceros con un control rígido para su acceso, al sistematizar la gestión del acondicionamiento de la documentación. Si bien existen otros sistemas de control de ingreso en el mercado, se logró agregar valor mediante la comunicación del sistema en cuestión con el sistema de control de documentación de terceros y con los procesos de alerta y gestión implementados. El trabajo realizado habilita una gestión proactiva, rápida y ordenada de los terceros, de forma de actuar inmediatamente ante problemas de ingresos. Las ventajas obtenidas incluyen:
+Finalmente, el trabajo cumplió con el requerimiento de lograr una gestión efectiva de los terceros, al implementar un proceso de control estricto de los requisitos de ingreso. Si bien existen otros sistemas de control de ingreso en el mercado, se logró agregar valor mediante la comunicación del sistema en cuestión con el sistema de control de documentación de terceros sumado a los procesos de alerta y gestión implementados. El trabajo realizado habilita una gestión proactiva, rápida y ordenada de los terceros, de forma de actuar inmediatamente ante problemas de ingresos. Las ventajas obtenidas incluyen:
 
 \begin{itemize}
 \item Reducir tiempo para la gestión.
@@ -28,40 +28,9 @@ Finalmente, el trabajo cumplió con el requerimiento de lograr una gestión efec
 
 Si bien todavía el sistema no se implementó en operativo, con las pruebas realizadas y analizando los ingresos de personal en los últimos dos años, se prevé evitar un 5\% de ingresos incorrectos o con problemas, y reducir los tiempos ante inconvenientes con la documentación en unas 10 horas hombre/mes.
 
-En la tabla \ref{tab:comparacionfinal} se muestra la comparación entre el sistema implementado y soluciones similares del mercado, en la que se puede apreciar el diferencial del sistema desarrollado.
-
-
-\begin{table}[h]
-	\centering
-	\caption[Comparación soluciones]{Comparación contra otras soluciones similares del mercado.}
-	\begin{tabular}{l c c c}   
-		\toprule
-		\textbf{Característica} & 
-		\textbf{Sistema } & 
-		\textbf{Pronext KY800} &	
-		\textbf{Samsung H505}    
-		\\
-		\midrule
-		Log de ingresos  & Si  & Si & No \\		
-		Interfaz a sistemas externos & Si & No & No \\		
-		Gestión integral de accesos & Si & No & No \\		
-		Máximo usuarios & Indefinido & 500  & 30  \\		
-		Conectividad/Protocolos & Wi-Fi & Bluetooth & No  \\		
-		Doble factor autenticación & No  & No & Si \\
-		Tarjetas RFID  & Si  & Si  & Si \\
-		Alerta de acceso  & Si & Si & Si \\
-		Acceso con huella & No & Si & No \\
-		\bottomrule
-		\hline
-	\end{tabular}
-	\label{tab:comparacionfinal}
-\end{table}
-
-Cabe destacar la importancia de los conocimientos obtenidos a lo largo de la carrera. En primer lugar, fueron muy importantes los aportes de la asignatura de gestión de proyectos. Una buena gestión de proyectos fue fundamental, tanto para lograr una planificación clara que actúe como guía a lo largo de todo el desarrollo, como para minimizar riesgos. En lo particular del trabajo, luego del comienzo del desarrollo se agregó un nuevo requerimiento al mismo. Teniendo el diagrama de Gantt \citep{WEBSITE:DiagGantt} armado, y en función del nuevo requerimiento y el avance real al momento de la solicitud, se pudo estimar el esfuerzo necesario y determinar que se podía incluir en el plan, dado que los plazos eran suficientes para poder cumplir con la fecha de finalización. Sin una gestión de proyectos clara, es muy probable que este nuevo requerimiento haya sido rechazado. 
+Cabe destacar la importancia de los conocimientos obtenidos a lo largo de la carrera. En primer lugar, fueron muy importantes los aportes de la asignatura de gestión de proyectos. Una buena gestión de proyectos fue fundamental, tanto para lograr una planificación clara que actúe como guía a lo largo de todo el desarrollo, como para minimizar riesgos. En lo particular del trabajo, luego del comienzo del desarrollo se solicitó agregar un nuevo requerimiento al mismo. Dado que se contaba con un diagrama de Gantt \citep{WEBSITE:DiagGantt} detallado y el avance real al momento de la solicitud, se pudo determinar que el nuevo requisito podía cumplirse en tiempo y forma, sin penalizar la fecha de finalización del proyecto. Sin una gestión de proyectos clara, es muy probable que este nuevo requerimiento haya sido rechazado.
 
 Adicionalmente, los conocimientos en desarrollo de aplicaciones multiplataforma permitieron plantear una solución que sea \textit{web responsive} y que a futuro se puede implementar en un entorno mobile con mínimo esfuerzo. También se abre la posibilidad de implementar el sistema en la nube.
-
-Por último, es importante mencionar que no se cumplió ninguno de los riesgos identificados durante la planificación, con lo cual no fue necesario aplicar el plan de mitigación. No obstante, el análisis y planificación temprana de los riesgos fue fundamental para hacer un seguimiento periódico, evitando que los mismos sucedan. Sin una correcta gestión y planificación, varios de los riesgos se podrían haber vuelto severos, impactando en los tiempos y recursos necesarios para completar el trabajo a término.
 
 
 %----------------------------------------------------------------------------------------
@@ -71,13 +40,13 @@ Por último, es importante mencionar que no se cumplió ninguno de los riesgos i
 
 Para la continuidad y mejora de este trabajo se plantean dos líneas de acción.
 
-En primer lugar, una línea de mejora del trabajo actual dentro de la que se incluyen:
+Como primera línea de acción, referida al trabajo desarrollado, se incluyen:
 
 \begin{itemize}
 \item Realizar mejoras en seguridad:
 
    \begin{itemize}
-      \item Agregar comunicación HTTPS entre los diferentes módulos del sistema. De este modo, se asegura que la información viaje encriptada y se evitan ataques del tipo \textit{man in the middle}. Esto permitirá migrar el sistema a la nube, donde las comunicaciones viajan entren varios sistemas abiertos, a través de Internet, y no quedan confinados al ámbito de una red interna o Intranet de una empresa.
+      \item Agregar comunicación HTTPS entre los diferentes módulos del sistema. De este modo, se asegura que la información viaje encriptada y se evitan ataques del tipo \textit{man in the middle}. Esto permitirá migrar el sistema a la nube, donde las comunicaciones viajan a través de Internet y no son seguras.
       \item Agregar un segundo factor de autenticación al sistema. Con el objetivo de evitar que ante pérdidas o robos de la tarjeta RFID de ingreso o duplicación de la misma un atacante pueda ingresar a planta, se plantea la posibilidad de agregar un teclado matricial de forma de requerir además de la tarjeta una clave numérica durante el proceso de ingreso.
    \end{itemize}
       
@@ -85,4 +54,4 @@ En primer lugar, una línea de mejora del trabajo actual dentro de la que se inc
    \item Realizar una prueba de implementación en la nube: utilizar la nube de Azure para probar y asegurar el escalamiento de la solución. Esto permitirá incluir nuevas locaciones o plantas industriales al trabajo, ya sea dentro de la empresa actual o para ser implementado en nuevas empresas.
 \end{itemize}   
 
-En segundo lugar, en el marco del proyecto integral de gestión de alertas y procesos, el objetivo es incorporar nuevos procesos y casos de uso al sistema. De hecho, ya fue solicitado un primer caso de uso por parte del laboratorio de metrología de la empresa. El mismo implica el control de temperatura y humedad de dicho laboratorio, para asegurar que ambas variables se encuentren dentro de los límites requeridos y generar alertas en caso de desvíos para poder actuar en consecuencia, manual o automáticamente. 
+Como segunda línea de acción, en el marco del proyecto integral de gestión de alertas y procesos, el objetivo es incorporar nuevos procesos y casos de uso al sistema. De hecho, ya fue solicitado un primer caso de uso por parte del laboratorio de metrología de la empresa. El mismo implica el control de temperatura y humedad de dicho laboratorio, para asegurar que ambas variables se encuentren dentro de los límites requeridos y generar alertas en caso de desvíos para poder actuar en consecuencia, manual o automáticamente. 

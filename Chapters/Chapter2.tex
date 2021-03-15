@@ -16,11 +16,11 @@ Descripción de los protocolo de comunicación (Wi-Fi/HTTP) utilizados para IoT.
 
 Descripción de tecnología Wi-Fi.
 
-\subsection{Protoclo HTTP}
+\subsection{Protocolo HTTP}
 
 Descripción de protocolo HTTP.
 
-\section{Componentes de Hardware utilizado}
+\section{Componentes de hardware utilizados}
 
 Descripción de los componentes de hardware utilizados: ESP32, lector de tarjetas, cerradura electrónica.
 
@@ -36,7 +36,7 @@ Descripción del módulo.
 
 Descripción de cerradura.
 
-\section{Tecnologías de Software aplicadas}
+\section{Tecnologías de software aplicadas}
  
 Descripción de las tecnologías de software utilizadas.
 
@@ -56,12 +56,34 @@ Descripción del software de control de versiones.
 
 Descripción de la herramienta.
 
-\section{Requerimientos}
+\section{Requerimientos}\label{sec:Requerimientos}
  
 Requerimientos del proyecto, tanto funcionales, no funcionales, de documentación y de validación. Enumeración de los mismos.
  
 \subsection{Requerimientos funcionales}
+\begin{enumerate}[label=1.\arabic*]
+\item El sistema debe permitir el sensado de datos de distintas fuentes y procesos de planta.
+\item El sistema deberá generar alertas a usuarios finales ante problemas detectados del sensado o situaciones límites/problemas potenciales.
+\item El sistema deberá generar tareas de corrección y prevención con un circuito de estados que permita trazar el origen del problema y la solución asociada.
+\item El sistema debe permitir hacer un seguimiento de la cantidad de alarmas diarias y mensuales generadas.
+\item El sistema debe permitir hacer un seguimiento de la cantidad de tareas diarias y mensuales generadas A su vez, se deberá poder ver la cantidad de tareas cerradas, en curso y su antigüedad en días.
+\item El sistema debe permitir gestionar usuarios. La gestión de usuarios incluye dar de alta nuevos usuarios, gestionar la recuperación y cambio de clave de los mismos. Dicho usuario se utilizará para acceder y utilizar el sistema.
+\end{enumerate}
 \subsection{Requerimientos no funcionales}
+\begin{enumerate}[label=2.\arabic*]
+\item El sistema deberá ser escalable, de forma de poder agregar más módulos actuadores y de sensado para los procesos de planta a futuro.
+\item El sistema deberá ser recuperable ante problemas de hardware o software, de forma de asegurar la disponibilidad y no corrupción de la información, cumpliendo con la política de resguardo de datos de la empresa.
+\item El sistema deberá poder operarse aún ante cortes puntuales de energía en algunas áreas, esto es, ante corte que no sean generales de toda la planta. Para ello se deberá contar con una política de suministro alternativo de energía para los servidores donde se ejecute el software. 
+\end{enumerate}
 \subsection{Requerimientos de documentación}
+\begin{enumerate}[label=3.\arabic*]
+\item Se debe generar una Memoria Técnica con la documentación de ingeniería detallada.
+\item Se debe generar un documento de casos de prueba.
+\item Se debe generar un documento de la Infraestructura del sistema y de la configuración por ambiente y pasaje entre  ambientes.
+\item Se deberá generar la documentación del sistema y del proyecto en el sistema de aprobación y documentación TPA de la empresa.
+\end{enumerate}
 \subsection{Requerimientos de validación}
+\begin{enumerate}[label=4.\arabic*]
+\item Se deberá tener una matriz de trazabilidad entre los casos de uso y los casos de prueba, validando el cumplimiento de cada uno y con la aprobación final del auspiciante.
+\end{enumerate}
 
