@@ -32,18 +32,18 @@ Para dar cuenta del proceso, en la tabla \ref{tab:tablaTiposPruebas}, se muestra
 
 		\toprule
 		\textbf{Tipo de Prueba} & 
-		\textbf{Descripción y objetivo } & 
-		\textbf{Herramientas utilizadas/Modo de prueba} 
+		\textbf{Objetivo } & 
+		\textbf{Descripción} 
 		\\
 		\midrule
 Pruebas unitarias  &
-Este tipo de pruebas permitió verificar de forma separada cada uno de los módulos de hardware y software del sistema. Para aquellos que tenían interfaces con otros módulos se utilizaron \textit{mocks} \citep{WEBSITE:Mocks}, de forma de simular el comportamiento de los mismos sin necesidad de tenerlos implementados.		
-		   & Postman/Newman. \textit{mocks} de módulos en caso de ser necesario. \\	
+Este tipo de pruebas permitió verificar de forma separada cada uno de los módulos de hardware y software del sistema. 		
+		   & Para aquellos módulos que tenían interfaces con otros  se utilizaron \textit{mocks} \citep{WEBSITE:Mocks}, de forma de simular el comportamiento de los mismos sin necesidad de tenerlos implementados. Se emplearon las herramientas Postman/Newman. \\	
 Pruebas de sistema &
 Este tipo de prueba permitió verificar el sistema de manera integral, asegurando la correcta comunicación e interrelación de los módulos. &
-Pruebas en ambiente de desarrollo sobre el sistema, con los módulos implementados. \\		Pruebas de aceptación &
-Este tipo de pruebas permitió validar el sistema de manera integral junto al cliente. De esta forma se aseguró no solo que el sistema se comporte según lo especificado y desarrollado, sino que el usuario final corrobore que el sistema actúa según sus necesidades y requisitos. &
-Pruebas en ambiente de desarrollo sobre el sistema, con los módulos implementados.	\\   
+Pruebas en ambiente de desarrollo, con los módulos implementados. \\		Pruebas de aceptación &
+Este tipo de pruebas permitió validar el desarrollo de manera integral junto al cliente. De esta forma se aseguró no solo que el sistema se comporte según lo especificado, sino que el usuario final corrobore que el sistema actúa según sus necesidades y requisitos. &
+Pruebas en ambiente de desarrollo, con los módulos implementados.	\\   
 		   
 		   	
 		\bottomrule
@@ -52,14 +52,14 @@ Pruebas en ambiente de desarrollo sobre el sistema, con los módulos implementad
 	\label{tab:tablaTiposPruebas}
 \end{table}
 
-Para lograr una trazabilidad entre los requerimientos y los casos de test se implementó, por un lado, una matriz de trazabilidad entre los requerimientos y los casos de uso definidos para el sistema, y por el otro, una matriz de trazabilidad entre los casos de uso y los casos de test. Esto quedó registrado en el documento de Casos de Uso y Casos de Test del sistema \citep{WEBSITE:CasosUsoYTest}.
+Para lograr una trazabilidad entre los requerimientos y los casos de test se implementó, por un lado, una matriz de trazabilidad entre los requerimientos y los casos de uso definidos para el sistema, y por el otro, una matriz de trazabilidad entre los casos de uso y los casos de test. Esto quedó registrado en el documento de Casos de Uso y Casos de Test \citep{WEBSITE:CasosUsoYTest}.
 
 \pagebreak
 \subsection{Herramientas utilizadas}
 
 Para la realización de las pruebas unitarias se utilizó Postman, la cual permitió centralizar y gestionar todas las pruebas desde una única herramienta. Además, se utilizó Newman para automatizar la ejecución de las mismas.
 
-En la figura \ref{fig:Postmanconfig} se muestra la herramienta Postman, junto a la organización de las pruebas unitarias, separadas por módulo y funcionalidad a testear.
+En la figura \ref{fig:Postmanconfig} se muestra la herramienta Postman, junto a la colección de pruebas unitarias definidas, su organización y la configuración del ambiente de trabajo.
 
 
 \begin{figure}[ht]
@@ -71,7 +71,7 @@ En la figura \ref{fig:Postmanconfig} se muestra la herramienta Postman, junto a 
 
 Por su parte, Newman permite importar los conjuntos de tests definidos en Postman, y mediante un script, ejecutar los mismos y ver los resultados obtenidos. De esta manera podemos correr todos los tests automáticamente, de forma rápida y simple, sin necesidad de hacerlo manualmente.
 
-Para llevar adelante dicho procedimiento, desde Postman se exportaron, tanto la colección de tests, como el ambiente de trabajo (\textit{environment} \citep{WEBSITE:EnvironmentPostman}). Esto generó dos archivos que se utilizaron para configurar la ejecución automática desde Newman. Luego, desarrollamos un script en el backend del trabajo para poder correr la colección con la herramienta de \textit{npm}.
+Para llevar adelante dicho procedimiento desde Postman se exportaron, tanto la colección de tests, como el ambiente de trabajo (\textit{environment} \citep{WEBSITE:EnvironmentPostman}). Esto generó dos archivos que se utilizaron para configurar la ejecución automática desde Newman. Luego, se desarrolló un script en el backend del trabajo para poder correr la colección con la herramienta de \textit{npm}.
 
 En la figura \ref{fig:scriptNewman} se muestra el script generado y la configuración del mismo en el archivo package.json del módulo de backend.
 
@@ -96,17 +96,16 @@ Por otra parte, en la figura \ref{fig:newmanEjecucion} se muestra la ejecución 
 
 \subsection{Mocks implementados}
 
-Para aquellos módulos que tenían dependencias (interfaces) con otros se utilizaron \textit{mocks}, lo que permitió testearlos, simulando el comportamiento de los dependientes, sin necesidad de tenerlos implementados.
+Para aquellos módulos que tenían dependencias (interfaces) con otros se utilizaron \textit{mocks}, lo que posibilitó testearlos simulando el comportamiento de los dependientes, sin necesidad de tenerlos implementados.
 
 Se desarrollaron dos \textit{mocks} en el trabajo:
 
 \begin{enumerate}
-\item mockActuador: este \textit{mock} permitió simular la operatoria del módulo actuador del sistema. El mismo se implementó como una aplicación web en Node.JS que respondía a las peticiones realizadas desde el backend del sistema.
-\item mockSistemaTerceros: este \textit{mock} permitió simular la interfaz entre el sistema desarrollado y el sistema de documentación de terceros. El mismo se implementó como una aplicación web en Node.JS, 
+\item mockActuador: permitió simular la operatoria del módulo actuador. El mismo se implementó como una aplicación web en Node.JS que respondía a las peticiones realizadas desde el backend.
+\item mockSistemaTerceros: permitió simular la interfaz entre el sistema desarrollado y el sistema de documentación de terceros. El mismo se implementó como una aplicación web en Node.JS, 
 \end{enumerate}
-
     
-\pagebreak
+\clearpage
 \section{Pruebas unitarias}
 
 En esta sección se detalla el conjunto de pruebas unitarias realizadas sobre cada uno de los módulos del sistema.
@@ -115,9 +114,9 @@ En esta sección se detalla el conjunto de pruebas unitarias realizadas sobre ca
 
 Al momento de testear el módulo sensor, ya se contaba con el módulo del backend desarrollado, con lo cual no fue necesario implementar un \textit{mock}.
 
-Para proceder con las pruebas, se configuraron algunas tarjetas RFID con diferentes valores que simularon cada uno de los escenarios posibles. Se utilizó con tal propósito un programa escrito en Arduino IDE, que permitió asignar el valor a la tarjeta a través del monitor serie. Luego, se alimentó el módulo y se procedió a testear cada caso, acercando una a una las tarjetas ya configuradas para observar los resultados obtenidos.
+Para proceder con las pruebas se configuraron algunas tarjetas RFID con diferentes valores que simularon cada uno de los escenarios posibles. Se utilizó con tal propósito un programa escrito en Arduino IDE que permitió asignar el valor a la tarjeta a través del monitor serie. Luego se alimentó el módulo y se procedió a testear cada caso, acercando una a una las tarjetas ya configuradas para observar los resultados obtenidos.
 
-En la tabla \ref{tab:tablaTestNodSensor} se detalla el conjunto de casos de tests más relevantes implementados para probar el módulo sensor y sus resultados. \footnote{Para tener un detalle completo de los test remitirse al documento de Casos de Uso y Casos de Test del sistema \citep{WEBSITE:CasosUsoYTest}.}
+En la tabla \ref{tab:tablaTestNodSensor} se detalla el conjunto de casos de tests más relevantes implementados para probar el módulo sensor y sus resultados. \footnote{Para tener un detalle completo de los test remitirse al documento de Casos de Uso y Casos de Test \citep{WEBSITE:CasosUsoYTest}.}
 
 \begin{table}[h]
 	\centering
@@ -130,10 +129,10 @@ En la tabla \ref{tab:tablaTestNodSensor} se detalla el conjunto de casos de test
 		\textbf{Resultados} 
 		\\
 		\midrule
-1 & Tarjeta RFID sin valor configurado. & El led de PinTarjNoLeida se prende durante dos segundos y se apaga. \\
-2 & Valor de tarjeta RFID recibido correctamente por el backend.	& El led PinOkSistema se prende durante dos segundos y se apaga. \\
-3 & El módulo sensor no registrado en el sistema. & El led PinNoOkSistemaCodigo se prende durante dos segundos y se apaga. \\
-4 & El módulo sensor no está activo en el sistema. & El led PinNoOkSistemaCodigo se prende durante dos segundos y se apaga. \\	   
+1 & Tarjeta RFID sin valor configurado. & El led ``PinTarjNoLeida'' se prende durante dos segundos y se apaga. \\
+2 & Valor de tarjeta RFID recibido correctamente por el backend.	& El led ``PinOkSistema'' se prende durante dos segundos y se apaga. \\
+3 & El módulo sensor no registrado en el sistema. & El led ``PinNoOkSistemaCodigo'' se prende durante dos segundos y se apaga. \\
+4 & El módulo sensor no está activo en el sistema. & El led ``PinNoOkSistemaCodigo'' se prende durante dos segundos y se apaga. \\	   
 		\bottomrule
 		\hline
 	\end{tabular}
@@ -142,7 +141,6 @@ En la tabla \ref{tab:tablaTestNodSensor} se detalla el conjunto de casos de test
 
 En la figura \ref{fig:TestTajetaSinCodigo} se muestra el caso de test 1 donde la tarjeta no tiene valor configurado. En la primera imagen se ve el momento en que se acerca la tarjeta y en la segunda imagen se ve el momento en que el módulo responde al usuario.
 
-
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.8\textwidth]{./Figures/TestTajetaSinCodigo.png}
@@ -150,7 +148,7 @@ En la figura \ref{fig:TestTajetaSinCodigo} se muestra el caso de test 1 donde la
 	\label{fig:TestTajetaSinCodigo}
 \end{figure}
 
-\clearpage
+
 En la figura \ref{fig:TestTajetaCodigoLeida} se muestra el caso de test 2 donde la tarjeta es válida, y el sistema se comunica correctamente con el módulo del backend. En la primera imagen se ve el momento en que se acerca la tarjeta y en la segunda imagen se ve el momento en que el módulo responde al usuario.
 
 
@@ -162,7 +160,7 @@ En la figura \ref{fig:TestTajetaCodigoLeida} se muestra el caso de test 2 donde 
 \end{figure}
 
 
-
+\clearpage
 \subsection{Testing del módulo actuador}
 
 Para testear el módulo actuador se utilizó Postman, dado que el módulo expone una conexión HTTP POST. Dentro de Postman generamos una carpeta llamada Test Actuador, en la cual almacenamos todos los casos de test. En el \textit{body} se envían los valores como un objeto JSON.
@@ -176,19 +174,18 @@ En la figura \ref{fig:TestActuadorConfig} se muestra la configuración de Postma
 	\label{fig:TestActuadorConfig}
 \end{figure}
 
-La prueba implicó testear cada uno de los casos generados, ejecutándolos desde Postman. A fin de automatizar los tests, y no depender de un control manual de la respuesta obtenida luego de cada ejecución, se configuraron para cada test las condiciones esperadas o aserciones, utilizando la sección Tests de la herramienta. Algunas de las aserciones definidas fueron que el código de estado HTTP sea el esperado y/o que la respuesta contenga cierto dato o cierto objeto JSON con determinados valores. Al ejecutar el test, si los resultados eran los previstos, Postman indicaba en el apartado Test Results que los mismos eran correctos.
+La prueba implicó testear cada uno de los casos generados, ejecutándolos desde Postman. A fin de automatizar los tests, y no depender de un control manual de la respuesta obtenida luego de cada ejecución, se configuraron para cada test las condiciones esperadas o aserciones, utilizando la sección ``Tests'' de la herramienta. Algunas de las aserciones definidas fueron que el código de estado HTTP sea el esperado y/o que la respuesta contenga cierto dato o cierto objeto JSON con determinados valores. Al ejecutar el test, si los resultados eran los previstos, Postman indicaba en el apartado ``Test Results'' que los mismos eran correctos.
 
-En la figura \ref{fig:PostmanAsercion} se muestra un ejemplo de configuración de la sección Tests y la ejecución del caso de test.
+En la figura \ref{fig:PostmanAsercion} se muestra un ejemplo de configuración de la sección ``Tests'' y la ejecución del caso de test.
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=0.8\textwidth]{./Figures/PostmanAsercion.png}
-	\caption{Configuración de sección Tests y resultados de la ejecución del test.}
+	\includegraphics[width=1\textwidth]{./Figures/PostmanAsercion.png}
+	\caption{Configuración de sección ``Tests'' y resultados de la ejecución del test.}
 	\label{fig:PostmanAsercion}
 \end{figure}
 
-En la tabla  \ref{tab:tablaTestNodActuador} se detalla el conjunto de casos de tests más relevantes implementados para probar el módulo actuador y sus resultados. Dentro del escenario a testear entre paréntesis se hace referencia al nombre del test en Postman. \footnote{Para tener un detalle completo de los test remitirse al documento de Casos de Uso y Casos de Test del sistema \citep{WEBSITE:CasosUsoYTest}.}
-
+En la tabla  \ref{tab:tablaTestNodActuador} se detalla el conjunto de casos de tests más relevantes implementados para probar el módulo actuador y sus resultados. Dentro del escenario a testear entre paréntesis se hace referencia al nombre del test en Postman. \footnote{Para tener un detalle completo de los test remitirse al documento de Casos de Uso y Casos de Test \citep{WEBSITE:CasosUsoYTest}.}
 
 \begin{table}[h]
 	\centering
@@ -201,8 +198,8 @@ En la tabla  \ref{tab:tablaTestNodActuador} se detalla el conjunto de casos de t
 		\textbf{Resultados} 
 		\\
 		\midrule
-1 & Habilitar ingreso a la planta (Ingreso OK). & El led IngresoOk parpadea durante 4 segundos y se activa la cerradura. \\
-2 & Inhabilitar ingreso a la planta (Ingreso NO OK – cierre barrera).	& El led IngresoNOOk se prende durante dos segundos y se apaga. \\
+1 & Habilitar ingreso a la planta (Ingreso OK). & El led ``IngresoOk'' parpadea durante 4 segundos y se activa la cerradura. \\
+2 & Inhabilitar ingreso a la planta (Ingreso NO OK – cierre barrera).	& El led ``IngresoNOOk'' se prende durante dos segundos y se apaga. \\
 3 & El pedido HTTP POST no cuenta con el campo de acción a realizar (Información faltante – Acción no válida). & El led Error parpadea dos veces. \\
 4 & El pedido HTTP POST no cuenta con token de autenticación (Sin token de autenticación). & El led Error parpadea una vez. \\	   
 		\bottomrule
@@ -211,17 +208,14 @@ En la tabla  \ref{tab:tablaTestNodActuador} se detalla el conjunto de casos de t
 	\label{tab:tablaTestNodActuador}
 \end{table}
 
-
-
-
 En la sección \ref{sec:PruebasAceptacion} se muestra el detalle de los casos de ingreso habilitado e inhabilitado junto a una figura del módulo actuador. Remitirse a dicha sección para más detalles.
 
-
+\pagebreak
 \subsection{Testing del módulo de backend}
 
-Para testear el módulo de backend se utilizó Postman, dado que el módulo expone una API Rest al frontend, una API de autenticación y un \textit{endpoint} \citep{WEBSITE:Endpoints} para recibir los datos de los módulos sensores. Dentro de Postman generamos una carpeta llamada Test API para testear la API expuesta al frontend, una carpeta llamada Autenticación e ingreso para testear la API de autenticación y una carpeta llamada Ingreso – recepción sensores para testear los ingresos generados desde el módulo sensor.
+Para testear el módulo de backend se utilizó Postman, dado que el módulo expone una API Rest al frontend, una API de autenticación y un \textit{endpoint} \citep{WEBSITE:Endpoints} para recibir los datos de los módulos sensores. Dentro de Postman generamos una carpeta llamada ``Test API'' para testear la API expuesta al frontend, una carpeta llamada ``Autenticación e ingreso'' para testear la API de autenticación y una carpeta llamada ``Ingreso – recepción sensores'' para testear los ingresos generados desde el módulo sensor.
 
-Dentro de la carpeta de Test API generamos cuatro subcarpetas para testear los casos sin autenticación y con autenticación para los diferentes perfiles de usuario. Dentro de la carpeta de Autenticación e ingreso, se colocaron los tests para el alta de usuario y el ingreso al sistema. Y dentro de la capeta Ingreso – recepción sensores, los tests para los ingresos generados desde el módulo sensor.
+Dentro de la carpeta de ``Test API'' generamos cuatro subcarpetas para testear los casos sin autenticación y con autenticación para los diferentes perfiles de usuario. Dentro de la carpeta de ``Autenticación e ingreso'', se colocaron los tests para el alta de usuario y el ingreso al sistema. Y dentro de la capeta ``Ingreso – recepción sensores'', los tests para los ingresos generados desde el módulo sensor.
 
 En la figura \ref{fig:testsBackend} se muestra las carpetas configuradas en Postman para el testeo de los casos de test de backend.
 
@@ -236,21 +230,21 @@ En la figura \ref{fig:testsBackend} se muestra las carpetas configuradas en Post
 Para testear cada caso, se procedió a configurar en Postman la URL de cada \textit{endpoint}, junto a los parámetros requeridos. Para los pedidos HTTP GET se configuró directamente la URL con los parámetros, y para los HTTP POST se completó el \textit{body} con el objeto JSON, junto a los valores requeridos según cada caso. 
 
 \pagebreak
-Para los casos de test con autenticación definidos dentro de la carpeta Test API, se procedió a utilizar los \textit{environments} y las variables globales de Postman. Un \textit{environment} permite definir ambientes de testing, dentro de los cuales podemos definir variables globales que pueden utilizarse en varios tests. Un test puede obtener un valor de la respuesta HTTP y guardarlo en una variable global, para luego ser utilizado por otro. De este modo, definimos un \textit{environment} llamado AmbienteTesting y dentro del mismo configuramos las siguientes variables globales:
+Para los casos de test con autenticación definidos dentro de la carpeta ``Test API'', se procedió a utilizar los \textit{environments} y las variables globales de Postman. Un \textit{environment} permite definir ambientes de testing dentro de los cuales podemos definir variables globales que pueden utilizarse en varios tests. Un test puede obtener un valor de la respuesta HTTP y guardarlo en una variable global para luego ser utilizado por otro. De este modo, definimos un \textit{environment} llamado ``AmbienteTesting'' y dentro del mismo configuramos las siguientes variables globales:
 
 \begin{itemize}
 \item URL-BASE: contiene la URL base del backend a partir del cual se define cada \textit{endpoint}. Con la misma configuramos cada HTTP POST o GET, de modo que si cambia la URL de nuestro backend, con solo modificar esta variable quedan ajustados todos los \textit{endpoints}.
 
 \item Access-token-global: utilizado para los \textit{endpoints} que son accesibles para cualquier usuario del sistema. Permite guardar el token de acceso del rol usuario.
 
-\item Access-token-global-gerente: utilizado para los \textit{endpoints} que son accesibles solo por el perfil de gerente de la aplicación. Permite guardar el token de acceso de rol gerente.
+\item Access-token-global-gerente: utilizado para los \textit{endpoints} que son accesibles solo por el perfil de gerente de la aplicación. Permite guardar el token de acceso del rol gerente.
 
 \item Access-token-global-admin: utilizado para los \textit{endpoints} que son accesibles solo por el perfil de administrador de la aplicación. Permite guardar el token de acceso para el rol de administrador.
 \end{itemize}
 
 Los tokens de acceso se configuran dentro de la sección header del test, con clave x-access-token y con el valor del token.
 
-En la figura \ref{fig:PostmanEnvironmnet} se muestra las variables globales definidas en Postman.
+En la figura \ref{fig:PostmanEnvironmnet} se muestran las variables globales definidas en Postman.
 
 \begin{figure}[ht]
 	\centering
@@ -259,18 +253,18 @@ En la figura \ref{fig:PostmanEnvironmnet} se muestra las variables globales defi
 	\label{fig:PostmanEnvironmnet}
 \end{figure}
 
-\subsubsection{Tests de carpeta Test API }
+\subsubsection{Tests de la carpeta Test API }
 
 Dentro de la carpeta Test API tenemos cuatro subcarpetas:
 
 \begin{itemize}
 \item Sin token autenticación: testea los \textit{endpoints} sin un token de autenticación.
-\item Con token autenticación – permiso user: testea los \textit{endpoints}  que son accesibles para cualquier usuario del sistema. En esta carpeta se define un test inicial llamado SigIn OK, que se utilizó para simular la autenticación de un usuario normal y completar la variable global access-token-global que fue utilizada por el resto de los tests de la carpeta.
-\item Con token autenticación – permiso gerente: testea los \textit{endpoints}  que son accesibles para el usuario con rol gerente. En esta carpeta se define un test inicial llamado SigIn OK, que se utilizó para simular la autenticación de un usuario gerente y completar la variable global access-token-global-gerente que fue utilizada por el resto de los tests de la carpeta.
-\item Con token autenticación – permiso admin: testea los \textit{endpoints} que son accesibles para el usuario con rol administrador. En esta carpeta se define un test inicial llamado SigIn OK, que se utilizó para simular la autenticación de un usuario administrador y completar la variable global access-token-global-admin que fue utilizada por el resto de los tests de la carpeta.
+\item Con token autenticación – permiso user: testea los \textit{endpoints}  que son accesibles para cualquier usuario del sistema. En esta carpeta se define un test inicial llamado ``SigIn OK'', que se utilizó para simular la autenticación de un usuario normal y completar la variable global access-token-global que fue utilizada por el resto de los tests de la carpeta.
+\item Con token autenticación – permiso gerente: testea los \textit{endpoints}  que son accesibles para el usuario con rol gerente. En esta carpeta se define un test inicial llamado ``SigIn OK'', que se utilizó para simular la autenticación de un usuario gerente y completar la variable global access-token-global-gerente que fue utilizada por el resto de los tests de la carpeta.
+\item Con token autenticación – permiso admin: testea los \textit{endpoints} que son accesibles para el usuario con rol administrador. En esta carpeta se define un test inicial llamado ``SigIn OK'', que se utilizó para simular la autenticación de un usuario administrador y completar la variable global access-token-global-admin que fue utilizada por el resto de los tests de la carpeta.
 \end{itemize}
 
-En la figura \ref{fig:TestBackendGerente} se muestran los tests de la subcarpeta Con token autenticación – permiso gerente, junto al test inicial de SignIn OK y al resto de los tests.
+En la figura \ref{fig:TestBackendGerente} se muestran los tests de la subcarpeta ``Con token autenticación – permiso gerente'', junto al test inicial ``SignIn OK'' y al resto de los tests.
 
 \begin{figure}[ht]
 	\centering
@@ -282,7 +276,7 @@ En la figura \ref{fig:TestBackendGerente} se muestran los tests de la subcarpeta
 \pagebreak
 \subsubsection{Detalle de tests y resultados}
 
-En la tabla  \ref{tab:tablaTestBackendSensor} se detalla el conjunto de casos de tests más relevantes implementados para probar la recepción de los datos de los módulos sensores y sus resultados. En la columna escenario a testear se hace referencia, entre paréntesis, al número del test en Postman.  \footnote{Para tener un detalle completo de los test remitirse al documento de Casos de Uso y Casos de Test del sistema \citep{WEBSITE:CasosUsoYTest}.}
+En la tabla  \ref{tab:tablaTestBackendSensor} se detalla el conjunto de casos de tests más relevantes implementados para probar la recepción de los datos de los módulos sensores y sus resultados. En la columna escenario a testear se hace referencia, entre paréntesis, al número del test en Postman.  \footnote{Para tener un detalle completo de los test remitirse al documento de Casos de Uso y Casos de Test \citep{WEBSITE:CasosUsoYTest}.}
 
 
 \begin{table}[h]
@@ -310,8 +304,29 @@ En la tabla  \ref{tab:tablaTestBackendSensor} se detalla el conjunto de casos de
 	\label{tab:tablaTestBackendSensor}
 \end{table}
 
+En la tabla  \ref{tab:tablaTestBackendAutenticacion} se detalla el conjunto de casos de tests más relevantes implementados para probar la API de autenticación y sus resultados. En la columna escenario a testear se hace referencia, entre paréntesis, al número del test en Postman.
 
-En la tabla \ref{tab:tablaTestBackendFrontend} se detalla el conjunto de casos de tests más relevantes implementados para probar la API Rest expuesta al frontend y sus resultados. En la columna escenario a testear se hace referencia, entre paréntesis, al número del test en Postman.  \footnote{\label{notaReusadaCasosTest}Para tener un detalle completo de los test remitirse al documento de Casos de Uso y Casos de Test del sistema \citep{WEBSITE:CasosUsoYTest}.}
+\begin{table}[h]
+	\centering
+	\caption[Tipos de pruebas backend]{Casos de test del módulo backend. Testing de la API de autenticación.}
+	\begin{tabular}{p{3.5cm} p{4.5cm} p{4cm}} 	
+
+		\toprule
+		\textbf{Subcarpeta Postman} & 
+		\textbf{Escenario a testear} &
+		\textbf{Resultados} 
+		\\
+		\midrule
+\multirow{3}{3.5cm}{Autenticación e ingreso.} & Alta de usuario con username, email y password correcto (5). & Se confirma el alta del usuario con HTTP código 200. \\
+                    & Alta de usuario con username o email repetido (1 y2). & Se rechaza el alta. Respuesta HTTP con código 400 y mensaje de error. \\
+                    & Inicio de sesión con username o password incorrecto (3 y 4). & Se rechaza el inicio de sesión. Respuesta HTTP con código 401 y mensaje de error. \\
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:tablaTestBackendAutenticacion}
+\end{table}
+
+En la tabla \ref{tab:tablaTestBackendFrontend} se detalla el conjunto de casos de tests más relevantes implementados para probar la API Rest expuesta al frontend y sus resultados. En la columna escenario a testear se hace referencia, entre paréntesis, al número del test en Postman.  \footnote{\label{notaReusadaCasosTest}Para tener un detalle completo de los test remitirse al documento de Casos de Uso y Casos de Test \citep{WEBSITE:CasosUsoYTest}.}
 
 
 \begin{table}[h]
@@ -345,35 +360,11 @@ En la tabla \ref{tab:tablaTestBackendFrontend} se detalla el conjunto de casos d
 \end{table}
 
 \pagebreak
-En la tabla  \ref{tab:tablaTestBackendAutenticacion} se detalla el conjunto de casos de tests más relevantes implementados para probar la API de autenticación y sus resultados. En la columna escenario a testear se hace referencia, entre paréntesis, al número del test en Postman.
-
-
-\begin{table}[h]
-	\centering
-	\caption[Tipos de pruebas backend]{Casos de test del módulo backend. Testing de la API de autenticación.}
-	\begin{tabular}{p{3.5cm} p{4.5cm} p{4cm}} 	
-
-		\toprule
-		\textbf{Subcarpeta Postman} & 
-		\textbf{Escenario a testear} &
-		\textbf{Resultados} 
-		\\
-		\midrule
-\multirow{3}{3.5cm}{Autenticación e ingreso.} & Alta de usuario con username, email y password correcto (5). & Se confirma el alta del usuario con HTTP código 200. \\
-                    & Alta de usuario con username o email repetido (1 y2). & Se rechaza el alta. Respuesta HTTP con código 400 y mensaje de error. \\
-                    & Inicio de sesión con username o password incorrecto (3 y 4). & Se rechaza el inicio de sesión. Respuesta HTTP con código 401 y mensaje de error. \\
-		\bottomrule
-		\hline
-	\end{tabular}
-	\label{tab:tablaTestBackendAutenticacion}
-\end{table}
-
-
 \section{Pruebas de sistema}
 
 En esta sección se detalla el conjunto de pruebas integrales realizadas sobre el sistema con todos sus módulos. Este test fue ejecutado por el desarrollador en el ambiente de pruebas, sin el cliente.
 
-Una vez implementados todos los módulos del sistema, fueron realizadas las siguientes tareas:
+Una vez implementados todos los módulos, se realizaron las siguientes tareas:
 
 \begin{enumerate}
 \item Se crearon usuarios con cada uno de los roles en la base de datos.
@@ -382,25 +373,26 @@ Una vez implementados todos los módulos del sistema, fueron realizadas las sigu
 
 \end{enumerate}
 
-Con los módulos en ejecución, se procedió a \textit{loguearse} en el sistema. En primer lugar, con un rol de usuario normal, luego con el rol de usuario gerente, posteriormente con el rol vigilante y por último con el rol administrador.
+Con los módulos en ejecución, se procedió a \textit{loguearse} en la aplicación. En primer lugar, con un rol de usuario normal, luego con el rol de usuario gerente, posteriormente con el rol vigilante y por último con el rol administrador.
 
-En la tabla  \ref{tab:tablaTestsSistemaUsuNormal} se detalla el conjunto de casos de tests más relevantes implementados para probar el rol de usuario normal del sistema y los resultados obtenidos.\footnote{\label{notaReusadaCasosTest}Para tener un detalle completo de los test remitirse al documento de Casos de Uso y Casos de Test del sistema \citep{WEBSITE:CasosUsoYTest}.}
+En la tabla  \ref{tab:tablaTestsSistemaUsuNormal} se detalla el conjunto de casos de tests más relevantes implementados para probar el rol de usuario normal (rol user) y los resultados obtenidos.\footnote{\label{notaReusadaCasosTest}Para tener un detalle completo de los test remitirse al documento de Casos de Uso y Casos de Test \citep{WEBSITE:CasosUsoYTest}.}
 
 \begin{table}[h]
 	\centering
-	\caption[Tipos de pruebas sistema]{Listado de pruebas de sistemas realizadas para el rol de usuario normal.}
-	\begin{tabular}{ p{4cm} p{8.5cm}} 	
+	\caption[Tipos de pruebas sistema]{Listado de pruebas realizadas para el rol de usuario normal.}
+	\begin{tabular}{ p{3.5cm} p{2.5cm} p{7cm}}
 
 		\toprule
-		\textbf{Pantalla del sistema testeada/Acción} & 
+		\textbf{Pantalla del sistema testeada} & 
+		\textbf{Acción} & 
 		\textbf{Resultados} 
 		\\
 		\midrule
-Mis tareas en curso/Visualizar tareas.  & El sistema muestra el listado de tareas en curso del usuario o indica que no tiene tareas en curso. \\
-Mis tareas en curso/Cerrar tarea.  & El sistema marca como completa la tarea del usuario y  muestra una alerta indicando que se cerró la tarea correctamente.  \\
-Mis tareas en curso/Ajustar observación en tarea.  & El sistema ajusta la observación en la tarea y muestra una alerta indicando que se actualizó la observación correctamente. \\
-Mi historial tareas/Visualizar historial tareas de usuario. & El sistema muestra el listado de tareas cerradas del usuario o indica que no tiene tareas cerradas. \\
-Mi perfil/Visualizar perfil. & El sistema muestra la información del usuario, incluyendo su \textit{username}, email, sector y roles asignados. \\
+Mis tareas en curso  & Visualizar tareas.  & Se muestra el listado de tareas en curso del usuario o se indica que no tiene tareas en curso. \\
+Mis tareas en curso & Cerrar tarea.  & Se marca como completa la tarea del usuario y se muestra una alerta indicando que se cerró la tarea correctamente.  \\
+Mis tareas en curso & Ajustar observación en tarea.  & Se ajusta la observación en la tarea y se muestra una alerta indicando que se actualizó la observación correctamente. \\
+Mi historial tareas & Visualizar historial tareas de usuario. & Se muestra el listado de tareas cerradas del usuario o se indica que no tiene tareas cerradas. \\
+Mi perfil & Visualizar perfil. & Se muestra la información del usuario, incluyendo su \textit{username}, email, sector y roles asignados. \\
 
 		\bottomrule
 		\hline
@@ -409,62 +401,44 @@ Mi perfil/Visualizar perfil. & El sistema muestra la información del usuario, i
 \end{table}
 
 
-En la tabla  \ref{tab:tablaTestsSistemaUsuAdmin} se detalla el conjunto de casos de tests más relevantes implementados para probar el rol de usuario administrador del sistema y los resultados obtenidos. 
+En la tabla  \ref{tab:tablaTestsSistemaUsuAdmin} se detalla el conjunto de casos de tests más relevantes implementados para probar el rol de usuario administrador y los resultados obtenidos. 
 
 \begin{table}[h]
 	\centering
-	\caption[Tipos de pruebas sistema]{Listado de pruebas de sistemas realizadas para el rol de usuario administrador.}
-	\begin{tabular}{ p{4cm} p{8.5cm}} 	
+	\caption[Tipos de pruebas sistema]{Listado de pruebas realizadas para el rol de usuario administrador.}
+	\begin{tabular}{ p{3.5cm} p{2.5cm} p{7cm}} 	
 
 		\toprule
-		\textbf{Pantalla del sistema testeada/Acción} & 
+		\textbf{Pantalla del sistema testeada} & 
+		\textbf{Acción} & 
 		\textbf{Resultados} 
 		\\
 		\midrule
-Gestión usuarios/Modificar estado de rol de usuario.  & El sistema modifica el estado del rol del usuario en la base de datos y muestra una alerta indicando que el cambio se realizó correctamente.  \\
+Gestión usuarios & Modificar estado de rol de usuario.  & Se modifica el estado del rol del usuario en la base de datos y se muestra una alerta indicando que el cambio se realizó correctamente.  \\
 		\bottomrule
 		\hline
 	\end{tabular}
 	\label{tab:tablaTestsSistemaUsuAdmin}
 \end{table}
 
-En la tabla  \ref{tab:tablaTestsSistemaUsuPorteria} se detalla el conjunto de casos de tests más relevantes implementados para probar el rol de usuario vigilante del sistema y los resultados obtenidos. 
+En la tabla  \ref{tab:tablaTestsSistemaUsuGerente} se detalla el conjunto de casos de tests más relevantes implementados para probar el rol de usuario gerente y los resultados obtenidos. 
 
 \begin{table}[h]
 	\centering
-	\caption[Tipos de pruebas sistema]{Listado de pruebas de sistemas realizadas para el rol de usuario vigilante.}
-	\begin{tabular}{ p{4cm} p{8.5cm}} 	
+	\caption[Tipos de pruebas sistema]{Listado de pruebas realizadas para el rol de usuario gerente.}
+	\begin{tabular}{p{3.5cm} p{2.5cm} p{7cm}}
 
 		\toprule
-		\textbf{Pantalla del sistema testeada/Acción} & 
+		\textbf{Pantalla del sistema testeada} & 
+		\textbf{Acción} & 
 		\textbf{Resultados} 
 		\\
 		\midrule
-Pantalla principal/Visualizar ingreso en portería.  & Cuando un tercero pretende ingresar en planta, el sistema muestra en su pantalla principal una alerta, indicando el intento de acceso y si el mismo se permitió o se rechazó, junto a un color particular para diferenciar ambos casos. La alerta se muestra por 6 segundos. \\
-		\bottomrule
-		\hline
-	\end{tabular}
-	\label{tab:tablaTestsSistemaUsuPorteria}
-\end{table}
-
-
-En la tabla  \ref{tab:tablaTestsSistemaUsuGerente} se detalla el conjunto de casos de tests más relevantes implementados para probar el rol de usuario gerente del sistema y los resultados obtenidos. 
-
-\begin{table}[h]
-	\centering
-	\caption[Tipos de pruebas sistema]{Listado de pruebas de sistemas realizadas para el rol de usuario gerente.}
-	\begin{tabular}{ p{4cm} p{8.5cm}} 	
-
-		\toprule
-		\textbf{Pantalla del sistema testeada/Acción} & 
-		\textbf{Resultados} 
-		\\
-		\midrule
-Estadísticas ingresos/Visualizar ingresos del mes.  & El sistema muestra un gráfico de barras con la cantidad de ingresos de cada día del mes especificado (ingresos ok y no ok) y un gráfico de torta con el total de ingresos ok y no ok del mes.  \\
-Estadísticas tareas/Visualizar estadísticas de tareas.  & El sistema muestra un gráfico de torta con la cantidad de tareas en curso, un gráfico de barras con la cantidad de tareas cerradas por cada mes del año y un gráfico de torta con el total de tareas completas del año.  \\
-Tareas en curso/Visualizar tareas en curso.
-  & El sistema muestra el listado de tareas en curso, junto a información de antigüedad, estado, fecha de inicio y detalle de las sub-tarea de cada sector.  \\
-Ingresos del día/Visualizar ingresos del día.  & El sistema muestra el listado de los ingresos, junto a información de horario, si el ingreso fue permitido o no y el detalle de la habilitación o rechazo junto al nombre del tercero.  \\
+Estadísticas ingresos & Visualizar ingresos del mes.  & Se muestra un gráfico de barras con la cantidad de ingresos de cada día del mes especificado (ingresos ok y no ok) y un gráfico de torta con el total de ingresos ok y no ok del mes.  \\
+Estadísticas tareas & Visualizar estadísticas de tareas.  & Se muestra un gráfico de torta con la cantidad de tareas en curso, un gráfico de barras con la cantidad de tareas cerradas por cada mes del año y un gráfico de torta con el total de tareas completas del año.  \\
+Tareas en curso & Visualizar tareas en curso.
+  & Se muestra el listado de tareas en curso, junto a información de antigüedad, estado, fecha de inicio y detalle de las sub-tarea de cada sector.  \\
+Ingresos del día & Visualizar ingresos del día.  & Se muestra el listado de los ingresos, junto a información de horario, si el ingreso fue permitido o no y el detalle de la habilitación o rechazo junto al nombre del tercero.  \\
 
 		\bottomrule
 		\hline
@@ -472,11 +446,31 @@ Ingresos del día/Visualizar ingresos del día.  & El sistema muestra el listado
 	\label{tab:tablaTestsSistemaUsuGerente}
 \end{table}
 
+En la tabla  \ref{tab:tablaTestsSistemaUsuPorteria} se detalla el conjunto de casos de tests más relevantes implementados para probar el rol de usuario vigilante y los resultados obtenidos. 
+
+\begin{table}[h]
+	\centering
+	\caption[Tipos de pruebas sistema]{Listado de pruebas realizadas para el rol de usuario vigilante.}
+	\begin{tabular}{p{3.5cm} p{2.5cm} p{7cm}}
+
+		\toprule
+		\textbf{Pantalla del sistema testeada} & 
+		\textbf{Acción} & 
+		\textbf{Resultados} 
+		\\
+		\midrule
+Pantalla principal & Visualizar ingreso en portería.  & Cuando un tercero pretende ingresar en planta, se muestra en la pantalla principal una alerta, indicando el intento de acceso y si el mismo se permitió o se rechazó, junto a un color particular para diferenciar ambos casos. La alerta se muestra por 6 segundos. \\
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:tablaTestsSistemaUsuPorteria}
+\end{table}
+
 
 \pagebreak
 \section{Pruebas de aceptación}\label{sec:PruebasAceptacion}
 
-En esta sección se detallan dos de las pruebas de aceptación realizadas en conjunto con el cliente. Estos tests fueron llevados a cabo por el desarrollador del sistema, en el ambiente de pruebas, para verificar el funcionamiento correcto del sistema implementado.
+En esta sección se detallan dos de las pruebas de aceptación realizadas en conjunto con el cliente. Estos tests fueron llevados a cabo por el desarrollador, en el ambiente de pruebas, para verificar el funcionamiento correcto del sistema implementado.
 
 Para preparar dicho ambiente se procedió de igual modo que el descripto en la sección anterior para las pruebas de sistema.
 
@@ -489,11 +483,11 @@ Para realizar la prueba se preparó el sistema y se lo dejó operativo. Se utili
 A continuación, se detallan los pasos realizados para el caso descripto:
 
 \begin{enumerate}
-\item Se ingresó al sistema con el usuario Portería y se accedió a la página principal.
-\item Se tomó la tarjeta RFID del personal de tercero habilitado en el sistema y se la acercó al módulo sensor. Como respuesta a esta interacción, sucedieron las siguientes acciones:
+\item Se ingresó a la aplicación con el usuario Portería y se accedió a la página principal.
+\item Se tomó la tarjeta RFID del personal de tercero habilitado y se la acercó al módulo sensor. Como respuesta a esta interacción, sucedieron las siguientes acciones:
 
 	\begin{enumerate}
-	\item El módulo sensor prendió el led verde de lectura de la tarjeta y luego prendió el led verde de comunicación correcta con el sistema de control.
+	\item El módulo sensor prendió el led verde de lectura de la tarjeta y luego prendió el led verde de comunicación correcta con el backend.
 	\item En la pantalla del usuario de portería se visualizó la alerta de ingreso del tercero durante 6 segundos. A continuación, se corroboró que el contador de ingresos correctos se había incrementado en la pantalla.
 	\item El módulo actuador prendió de forma intermitente el led verde de ingreso habilitado durante 4 segundos y se cerró el pestillo de la cerradura electrónica. Pasado ese tiempo el pestillo se abrió nuevamente.
 	\end{enumerate}
@@ -539,18 +533,18 @@ Para realizar la prueba se preparó el sistema y se lo dejó operativo. Se utili
 A continuación, se detallan los pasos realizados para el caso descripto:
 
 \begin{enumerate}
-\item Se ingresó al sistema con el usuario Portería y se accedió a la página principal.
-\item Se tomó la tarjeta RFID del personal de tercero inhabilitado en el sistema y se acercó la misma al módulo sensor. Como respuesta a esta interacción, sucedieron las siguientes acciones:
+\item Se ingresó a la aplicación con el usuario Portería y se accedió a la página principal.
+\item Se tomó la tarjeta RFID del personal de tercero inhabilitado y se acercó la misma al módulo sensor. Como respuesta a esta interacción, sucedieron las siguientes acciones:
 
 	\begin{enumerate}
-	\item El módulo sensor prendió el led verde de lectura de la tarjeta y luego prendió el led verde de comunicación correcta con el sistema de control.
+	\item El módulo sensor prendió el led verde de lectura de la tarjeta y luego prendió el led verde de comunicación correcta con el backend.
 	\item En la pantalla del usuario de portería se visualizó la alerta de ingreso inhabilitado del tercero durante 6 segundos. A continuación, se corroboró que el contador de intento de ingresos incorrectos se había incrementado en la pantalla.
 	\item El módulo actuador prendió durante 2 segundos el led rojo de ingreso inhabilitado. El pestillo de la cerradura electrónica se mantuvo abierto todo el tiempo.
 	\item Se envió un email a los usuarios de los sectores encargados de controlar la documentación del tercero, con el detalle del intento de ingreso.
 	\item Se generó una tarea de control de documentación para cada uno de los sectores de la empresa responsables del proceso.
 	\end{enumerate}
 
-\item Se ingresó al sistema con un usuario de sector HESA (Seguridad y Medio Ambiente) para corroborar la generación de la tarea de control. Se accedió a la aplicación Mis tareas en curso (preguntar como pongo estas cosas) y se visualizó la nueva tarea asignada al usuario.
+\item Se ingresó a la aplicación con un usuario de sector HESA (Seguridad y Medio Ambiente) para corroborar la generación de la tarea de control. Se accedió a la aplicación ``Mis tareas en curso'' y se visualizó la nueva tarea asignada al usuario.
 \end{enumerate}
 
 En la figura \ref{fig:ingresNOOK} se muestra el paso 2 b) de la prueba con la información visualizada por la vigilancia.
@@ -591,7 +585,7 @@ En la figura \ref{fig:Tarea} se ve el paso 3 de la prueba, donde el usuario ve l
 \end{figure}
 
 \clearpage
-\section{Comparativa con otras soluciones del mercado}
+\section{Comparativa con otras soluciones del mercado}\label{sec:comparativa}
 
 A modo de conclusión de los ensayos realizados, se hace una comparativa contra soluciones similares que existen en el mercado para el control de ingreso. De acuerdo con el análisis comparativo realizado, se destaca el diferencial de este sistema al permitir comunicarse con otros sistemas de terceros y lograr una gestión integral de accesos, con capacidad de generar alertas y tareas de control sobre el proceso.
 

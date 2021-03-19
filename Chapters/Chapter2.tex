@@ -6,7 +6,7 @@
 %	SECTION 1
 %----------------------------------------------------------------------------------------
 
-Poner párrafo introductorio.
+En el presente capítulo se describen las principales tecnologías utilizadas para la realización de trabajo, incluyendo componentes de hardware y las tecnologías y herramientas de software.
 
 \section{Protocolos de comunicación}
 
@@ -41,6 +41,41 @@ Descripción de cerradura.
 Descripción de las tecnologías de software utilizadas.
 
 \subsection{Node.JS}
+
+
+En la tabla \ref{tab:nodelibrerias} se muestra el detalle de las librerías utilizadas en Node.JS.
+
+\begin{table}[h]
+	\centering
+	\caption[Leds módulo sensor ]{Librerías utilizadas en Node.JS .}
+	\begin{tabular}{p{4cm} p{8.5cm} } 	
+
+		\toprule
+		\textbf{Librería} & 
+		\textbf{Descripción/Uso}
+		\\
+		\midrule
+axios & axios
+Cliente HTTP para Javascript. Permite realizar llamadas HTTP POST y GET.\\
+bcryptjs & Implementa funciones de hash para guardar las passwords encriptadas.\\
+express & Framework para generar la aplicación web en Node.JS.\\
+cors & Librería para implementar CORS en nuestra solución.\\
+jsonwebtoken & Librería para gestionar tokens JWT en nuestra aplicación.\\
+mongodb & Librería para conectarnos a la base de datos MongoDB.\\
+newman & Librería para ejecutar los test automáticos generados en Postman. \\
+Nodemailer & Librearía que permite el envío de emails.\\
+pg & Librería para conectarnos a la base de datos PostgreSQL.\\
+socket.io & Librería para implementar \textit{WebSockets} en nuestra aplicación.
+\\
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:nodelibrerias}
+\end{table}
+
+
+
+
 \subsection{Ionic}
 \subsection{PostgreSQL}
 \subsection{MongoDB}
