@@ -38,7 +38,7 @@
   morecomment=[s]{/*}{*/}
 }
 
-En el presente capítulo se describe la arquitectura del sistema, el diseño y la implementación del hardware y del software y las herramientas de desarrollo utilizadas. 
+En el presente capítulo se describe la arquitectura del sistema, el diseño y la implementación del hardware y del software de la solución. 
 
 
 %----------------------------------------------------------------------------------------
@@ -53,7 +53,7 @@ En la figura \ref{fig:tp-final-infra} se muestra el diagrama en bloques del sist
 \vspace{0.7cm}
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=1\textwidth]{./Figures/tp-final-infra.png}
+	\includegraphics[width=1\textwidth]{./Figures/tp-final-infra.jpg}
 	\caption{Diagrama en bloques del sistema implementado.}
 	\label{fig:tp-final-infra}
 \end{figure}
@@ -64,7 +64,7 @@ En la figura \ref{fig:tp-final-infra} se muestra el diagrama en bloques del sist
 El trabajo desarrollado se divide en los siguientes módulos:
 
 \begin{itemize}
-\item Módulo de sensado: es el encargado de leer la tarjeta RFID del personal de tercero que quiere ingresar a la planta y enviar la información al módulo de backend para analizar si la persona cumple con los requisitos para acceder o no.
+\item Módulo de sensado: es el encargado de leer la tarjeta RFID y enviar la información al módulo de backend para analizar si la persona cumple con los requisitos para acceder o no.
 \item Módulo actuador: es el encargado de comandar la cerradura electrónica que permite o evita el ingreso del tercero a la locación industrial. El mismo recibe las órdenes de cómo operar desde el módulo de backend.
 \item Módulos de backend y frontend: si bien estos módulos están implementados de manera conjunta en un único servidor de aplicación, cumplen funciones diferentes:
 
@@ -77,12 +77,12 @@ El trabajo desarrollado se divide en los siguientes módulos:
 
 \subsection{Protocolos de comunicación entre módulos}
 Para la comunicación entre los módulos se utilizaron invocaciones HTTP GET y POST. 
-Tomando como referencia el modelo TPC/IP \citep{WEBSITE:modeloTCPIP}, en la tabla \ref{tab:protocolosComunicacionCap3} se muestra el detalle de protocolos empleados en cada capa:
+Tomando como referencia el modelo TCP/IP \citep{WEBSITE:modeloTCPIP}, en la tabla \ref{tab:protocolosComunicacionCap3} se muestra el detalle de protocolos empleados en cada capa:
 
 
 \begin{table}[h]
 	\centering
-	\caption[Protocolos comunicación]{Protocolos de comunicación empleados por el sistema.}
+	\caption[Protocolos comunicación empleados por el sistema]{Protocolos de comunicación empleados por el sistema.}
 	\begin{tabular}{p{3.5cm} p{8.5cm} } 	
 
 		\toprule
@@ -94,9 +94,14 @@ Tomando como referencia el modelo TPC/IP \citep{WEBSITE:modeloTCPIP}, en la tabl
 Aplicación & HTTP (utilizando los verbos GET y POST)\\ 
 Transporte & TCP\\
 Internet & IP (IPv4)\\
-Acceso al medio & Wi-Fi (802.11n) para la comunicación entre módulos.
+Acceso al medio &
+\begin{itemize}
+\item Wi-Fi (802.11n) para la comunicación entre módulos
+\item Wi-Fi o IEEE 802.3 (Ethernet) para la comunicación entre el usuario y el módulo de frontend
+\end{itemize} \\
 
-Wi-Fi o IEEE 802.3 (Ethernet) para la comunicación entre el usuario y el módulo de frontend.\\
+
+
 		\bottomrule
 		\hline
 	\end{tabular}
@@ -105,6 +110,7 @@ Wi-Fi o IEEE 802.3 (Ethernet) para la comunicación entre el usuario y el módul
 
 Para la elección de los protocolos, se tomó en cuenta las tecnologías disponibles en la empresa. Además, al utilizar protocolos abiertos, estándares y extendidos mundialmente, se logró un sistema portable y adaptable.
 
+\pagebreak
 \subsection{Tecnologías de bases de datos}
 
 El sistema en general y el módulo de backend en particular, se soporta en dos bases de datos:
@@ -124,14 +130,13 @@ A fin de generar una solución escalable y modular, se utilizaron contenedores d
 \item Lograr la escalabilidad futura de la solución: al permitir utilizar un orquestador de contenedores como Kubernetes que permite crear o eliminar instancias de cada contenedor dinámicamente en función de diferentes variables, como el consumo de recursos o la cantidad de solicitudes por segundo. Una ventaja adicional es que, si migramos la solución a la nube, al utilizar este esquema de contenedores dinámicos podemos reducir el costo del servicio, dado que estaremos pagando solo por los contenedores que necesitamos en cada instante de tiempo, sin necesidad de tener un número fijo de recursos en todo momento.
 \end{itemize}
 
-\pagebreak
 \section{Detalle de módulos de hardware}
 
-En esta sección se describe detalladamente la implementación de los dos módulos de hardware desarrollados en el proyecto. El módulo sensor, encargado de la lectura de las tarjetas RFID del personal de tercero, y el módulo actuador, encargado de gestionar la cerradura electrónica para permitir o evitar el ingreso de dicho personal.
+En esta sección se describe detalladamente la implementación de los dos módulos de hardware desarrollados en el trabajo. El módulo sensor, encargado de la lectura de las tarjetas RFID del personal de tercero, y el módulo actuador, encargado de gestionar la cerradura electrónica para permitir o evitar el ingreso de dicho personal.
 
 \subsection{Módulo sensor}
 
-Es el encargado de leer las tarjetas RFID del tercero y enviar el valor que tiene la misma al módulo de backend.
+Es el encargado de leer las tarjetas RFID y enviar el valor que tiene la misma al módulo de backend.
 
 Cada tarjeta RFID tiene un valor numérico guardado de 4 caracteres de longitud. Las tarjetas permiten definir valores de hasta 16 caracteres, pero dado que la empresa utiliza códigos de 4 caracteres se colocó ese límite para tener uniformidad.
 
@@ -140,7 +145,7 @@ El módulo está compuesto por los siguientes componentes:
 \begin{itemize}
 \item Un lector de tarjetas RFID RC522. La elección del mismo se debió a su bajo costo, alta disponibilidad en el mercado y su capacidad para leer las tarjetas que tiene la empresa, que operan en la frecuencia de 13,56 MHz.
 \item Un \textit{SoC} (System on a chip) ESP32-WRROM-32. La elección del mismo se debió a su bajo costo, alta disponibilidad en el mercado, facilidad de programación y soporte de redes Wi-Fi (normas 802.11 b/g/n). Esto último simplifica la comunicación del módulo con el backend y evita tener que conectarse a la red LAN de la empresa, lo que hubiera requerido hacer una extensión del cableado de la misma.
-\item Un conjunto de leds, que permite al usuario conocer el estado del sistema y el estado de sus interacciones con el módulo. Para ello se dispuso un grupo de 3 leds generales de control y otro de 3 leds de respuesta ante las comunicaciones con el backend.
+\item Un conjunto de leds. Permite al usuario conocer el estado del sistema y el estado de sus interacciones con el módulo. Para ello se dispuso un grupo de 3 leds generales de control y otro de 3 leds de respuesta ante las comunicaciones con el backend.
 
 \end{itemize}
 
@@ -148,16 +153,17 @@ En la figura \ref{fig:moduloSensor} se muestra el módulo sensor junto a sus com
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=1\textwidth]{./Figures/moduloSensor.png}
+	\includegraphics[width=0.8\textwidth]{./Figures/moduloSensor.png}
 	\caption{Módulo sensor junto a sus componentes.}
 	\label{fig:moduloSensor}
 \end{figure}
 
+\clearpage
 \subsubsection{Configuraciones y variables del módulo}
 
 Para implementar este módulo, se desarrolló un programa en el entorno Arduino IDE. El mismo lee las tarjetas RFID y se comunica con el backend, enviando los datos requeridos para procesar el intento de ingreso. Dicha comunicación se realiza a través de la red Wi-Fi de la empresa.
 
-\pagebreak
+
 El módulo cuenta con un conjunto de variables a configurar para su correcta operación:
 
 \begin{itemize}
@@ -184,15 +190,15 @@ Una vez enviado el HTTP POST, el módulo recibe como respuesta un valor que indi
 
 \subsubsection{Leds del sistema}
 
-El módulo cuenta con un conjunto de leds, que permiten al usuario conocer el estado del mismo y el resultado de sus interacciones con éste.
+El módulo cuenta con un conjunto de leds, que permiten al usuario conocer el resultado de sus interacciones con éste.
 
-Cuando el mismo se inicializa hace un chequeo de estos leds, prendiéndolos y apagándolos, uno a uno, durante medio segundo.
+Al inicializar el módulo se realiza un chequeo de estos leds, prendiéndolos y apagándolos, uno a uno, durante medio segundo.
 
 En la tabla \ref{tab:combinacionLedsSensor} se muestra el detalle de los leds o combinaciones posibles de leds, junto a la información que brindan al usuario cuando se encienden.
 
 \begin{table}[h]
 	\centering
-	\caption[Leds módulo sensor ]{Combinación de leds e información para el usuario cuando se prenden.}
+	\caption[Leds del módulo sensor]{Combinación de leds e información para el usuario cuando se prenden.}
 	\begin{tabular}{p{4cm} p{8.5cm} } 	
 
 		\toprule
@@ -228,12 +234,12 @@ El módulo está compuesto por los siguientes componentes:
 
 \begin{itemize}
 \item Un \textit{SoC} ESP32-WRROM-32. La elección del mismo se debió a su bajo costo, alta disponibilidad en el mercado, facilidad de programación y soporte de redes Wi-Fi (normas 802.11 b/g/n). Esto último simplifica la comunicación del módulo con el backend y evita tener que conectarse a la red LAN de la empresa, lo que hubiera requerido hacer una extensión del cableado de la misma.
-\item Un regulador de tensión, que brinda los niveles de tensión requeridos para energizar el ESP32 y para la activación del Mosfet IRF520. 
+\item Un regulador de tensión. Brinda los niveles de tensión requeridos para energizar el ESP32 y para la activación del Mosfet IRF520. 
 \item Cerradura electrónica. La misma se acciona y alimenta desde el Mosfet IRF520.
 \item Conversor de niveles lógicos. Se utiliza para convertir la tensión de salida del ESP32 (3.3 V) a la tensión requerida para accionar el Mosfet IFR520 (5V).
-\item Mosfet IRF520: permite accionar la cerradura electrónica, brindando el nivel de tensión requerida por la misma (12 V).
-\item Un conjunto de leds, que permiten conocer si el actuador está encendido y el estado del ingreso del tercero (habilitado/inhabilitado/error).
-\item Fuente de alimentación de 12 V, que es utilizada para alimentar el  Mosfet IRF520 y al regulador de tensión.
+\item Mosfet IRF520. Permite accionar la cerradura electrónica, brindando el nivel de tensión requerida por la misma (12 V).
+\item Un conjunto de leds. Permiten conocer si el actuador está encendido y el estado del ingreso del tercero (habilitado/inhabilitado/error).
+\item Fuente de alimentación de 12 V. Es utilizada para alimentar el  Mosfet IRF520 y al regulador de tensión.
 \end{itemize}
 
 En la figura \ref{fig:moduloActuador} se muestra el módulo actuador con sus componentes.
@@ -280,7 +286,7 @@ El backend realiza solicitudes al actuador como se explica en la sub-sección an
 
 \begin{table}[h]
 	\centering
-	\caption[Respuestas backend ]{Respuestas posibles del módulo al usuario y al backend ante las solicitudes recibidas.}
+	\caption[Respuestas posibles del módulo al usuario y al backend ante las solicitudes recibidas]{Respuestas posibles del módulo al usuario y al backend ante las solicitudes recibidas.}
 	\begin{tabular}{p{4cm} p{4.5cm} p{4.5cm} } 	
 
 		\toprule
@@ -299,10 +305,10 @@ Acción=``APERTURA''
 
 Valor=``CERRAR''
 
-Token con valor correcto. & Se prende el led rojo durante 2 segundos. & Se envía respuesta HTTP con código 200 y mensaje ``Sin token de autenticación.'' \\
-Sin token. & Se prende el led amarillo  durante medio segundo y se apaga. & Se envía respuesta HTTP con código 401 y mensaje ``Sin token de autenticación.'' \\
-Token con valor incorrecto. & Se prende el led amarillo  durante medio segundo y se apaga. & Se envía respuesta HTTP con código 403 y mensaje ``Token de autenticación incorrecto.'' \\
-Acción no especificada o con valor incorrecto. & Se prende el led amarillo de manera intermitente durante 2 segundos. & Se envía respuesta HTTP con código 400 y mensaje ``La acción especificada no es válida.'' \\
+Token con valor correcto. & Se prende el led rojo durante 2 segundos. & Se envía respuesta HTTP con código 200 y mensaje ``Sin token de autenticación.''. \\
+Sin token. & Se prende el led amarillo  durante medio segundo y se apaga. & Se envía respuesta HTTP con código 401 y mensaje ``Sin token de autenticación.''. \\
+Token con valor incorrecto. & Se prende el led amarillo  durante medio segundo y se apaga. & Se envía respuesta HTTP con código 403 y mensaje ``Token de autenticación incorrecto.''. \\
+Acción no especificada o con valor incorrecto. & Se prende el led amarillo de manera intermitente durante 2 segundos. & Se envía respuesta HTTP con código 400 y mensaje ``La acción especificada no es válida.''. \\
 Valor no especificado o valor incorrecto. & Se prende el led amarillo de manera intermitente durante 3 segundos. & Se envía respuesta HTTP con código 400 y mensaje ``El valor especificado no es válido''. \\
 		\bottomrule
 		\hline
@@ -313,7 +319,7 @@ Valor no especificado o valor incorrecto. & Se prende el led amarillo de manera 
 \pagebreak
 \section{Detalle de módulos de software}
 
-En esta sección se describe detalladamente la implementación de los dos módulos de software desarrollados en el proyecto: el de backend, encargado tanto de recibir las solicitudes del módulo sensor y de frontend como de enviar comandos al actuador, y el módulo de frontend, encargado de gestionar las solicitudes del usuario mediante una interfaz gráfica.
+En esta sección se describe detalladamente la implementación de los dos módulos de software desarrollados en el trabajo: el de backend, encargado tanto de recibir las solicitudes del módulo sensor y de frontend como de enviar comandos al actuador, y el módulo de frontend, encargado de gestionar las solicitudes del usuario mediante una interfaz gráfica.
 
 \subsection{Módulo de backend}
 
@@ -340,7 +346,7 @@ En la tabla \ref{tab:carpetasBackend}  se expone detalladamente el contenido y f
 
 \begin{table}[h]
 	\centering
-	\caption[Carpetas backend ]{Detalle de archivos y carpetas del módulo de backend.}
+	\caption[Detalle de archivos y carpetas del módulo de backend]{Detalle de archivos y carpetas del módulo de backend.}
 	\begin{tabular}{p{2cm} p{11cm}} 	
 		\toprule
 		\textbf{Archivo/
@@ -363,7 +369,7 @@ logs & Almacena los \textit{logs} del sistema. Se guarda un archivo de \textit{l
 main
 
 Controller & Es el encargado de gestionar las solicitudes de ingreso del módulo sensor. Se comunica con el sistema de documentación de terceros, determina los tipos de acción a realizar y dispara cada una de ellas, invocando a los controladores de la carpeta controllers.  \\
-middleware & Contiene los métodos necesarios para la gestión de la autenticación \\
+middleware & Contiene los métodos necesarios para la gestión de la autenticación. \\
 routes & Contiene cada uno de los \textit{endpoints} expuestos tanto para la API de autenticación (sub-carpeta ``routerAuth'') como para la recepción de datos desde el módulo sensor (sub-carpeta ``routerSensores''). \\
 sistDecision & Contiene el sub-módulo que se encarga de determinar las acciones a realizar cuando hay una solicitud de ingreso de un tercero, para lo cual utiliza la base de datos implementada en MongoDB. \\
 test & Contiene los archivos necesarios para la ejecución de las pruebas automáticos implementados para la solución. En el capítulo \ref{Chapter4} se explican con mayor detalle las pruebas implementadas y los archivos utilizados. \\
@@ -379,7 +385,7 @@ index.js & Contiene la configuración para levantar la aplicación y cada una de
 
 La API de autenticación se utiliza para segurizar las invocaciones realizadas al backend. Para hacerlo emplea tokens JWT. Además, permite el alta de nuevos usuarios, gestionar el inicio de sesión de los mismos y el cambio y reseteo de passwords.
 
-Para el desarrollo de esta API utilizamos 2 librerías disponibles en node.JS: bcryptjs y jsonwebtoken. La primera permite implementar una función de \textit{hash}, que posibilita guardar encriptado el password de los usuarios. La segunda permite generar el token JWT que es entregado al usuario para que pueda acceder a los diferentes \textit{endpoints}, asegurando su autenticidad. Dicho token tiene una duración de 24 horas.
+Para el desarrollo de esta API se utilizan 2 librerías disponibles en node.JS: bcryptjs y jsonwebtoken. La primera permite implementar una función de \textit{hash}, que posibilita guardar encriptado el password de los usuarios. La segunda permite generar el token JWT que es entregado al usuario para que pueda acceder a los diferentes \textit{endpoints}, asegurando su autenticidad. Dicho token tiene una duración de 24 horas.
 
 \subsubsection{Funcionamiento del módulo ante una solicitud del módulo sensor}{\label{sec:subSeccionSolitiudModuloSensor}}   
 
@@ -442,7 +448,7 @@ En la figura \ref{fig:frontendCarpetas} se muestra la estructura en carpetas def
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=1\textwidth]{./Figures/frontendCarpetas.png}
+	\includegraphics[width=.6\textwidth]{./Figures/frontendCarpetas.png}
 	\caption{Estructura de directorio del frontend desarrollado en Visual Studio Code.}
 	\label{fig:frontendCarpetas}
 \end{figure}
@@ -452,7 +458,7 @@ En la tabla \ref{tab:carpetasFrontend}  se expone detalladamente el contenido y 
 
 \begin{table}[h]
 	\centering
-	\caption[Carpetas frontend ]{Detalle de archivos y carpetas del módulo de frontend.}
+	\caption[Detalle de archivos y carpetas del módulo de frontend]{Detalle de archivos y carpetas del módulo de frontend.}
 	\begin{tabular}{p{2.3cm} p{10.7cm}} 	
 		\toprule
 		\textbf{Archivo/
@@ -461,30 +467,48 @@ En la tabla \ref{tab:carpetasFrontend}  se expone detalladamente el contenido y 
 		\\
 		\midrule
 cambio-password & Contiene la página que gestiona el cambio de password de los usuarios. \\
+\hline
 components & Contiene tres sub-carpetas con los componentes desarrollados para la solución. Los componentes implementados son:
 \begin{itemize}
 \item estadística-evento-fecha: muestra la cantidad de ingresos habilitados y rechazados en el día.
 \item listar-tareas: muestra una grilla con el listado de tareas y sub-tareas en un rango de fechas y con un estado particular. 
 \item tareas-usuario: muestra un listado con cada una de las sub-tareas que tiene un usuario.
 \end{itemize} \\
+\hline
 estadísticas-ingreso-mes & Contiene la página que muestra las estadísticas de cantidad de ingresos por mes.\\
+\hline
 estadisticas-tareas-mes & Contiene la página que muestra las estadísticas de cantidad de tareas cerradas por año.\\
+\hline
 gestión-usuarios & Contiene la página que muestra el listado de usuarios del sistema y permite cambiar el estado de los mismos (activo/inactivo) y agregarles o quitarles roles. \\
+\hline
 helpers & Contiene la clase ``authInterceptor'' que permite enviar cada solicitud al backend con el token de autenticación. Para esto intercepta el pedido HTTP y le agrega al encabezado dicho token. \\
+\hline
 home & Contiene la página principal de la aplicación que muestra, según el rol del usuario, las estadísticas de ingreso al sistema o las tareas en curso del mismo.\\
+\hline
 ingresos-hoy & Contiene la página que muestra el listado de ingresos del día con la fecha de cada ingreso y si el usuario fue habilitado o no. \\
+\hline
 listado-tareas & Contiene la página que muestra el listado de tareas en curso. Utiliza el componente ``listar-tareas''. \\
+\hline
 listado-tareas
 -historico & Contiene la página que muestra el listado de tareas completas. Utiliza el componente ``listar-tareas''. \\
+\hline
 login & Contiene la página de inicio de sesión para los usuarios. \\
+\hline
 mi-perfil & Contiene la página que muestra el perfil de usuario y sus datos. \\
+\hline
 mis-tareas & Contiene la página que muestra las tareas en curso asignadas al usuario. \\
+\hline
 mis-tareas
 -historico & Contiene la página que muestra las tareas cerradas del usuario. \\
+\hline
 model & Contiene las clases que representan a los objetos de negocio del sistema: roles, usuarios, tareas, sub-tareas, sectores. \\
+\hline
 pipes & Contiene la implementación de un \textit{pipe}, que define diferentes colores en función del valor de entrada recibido. Sirve para alertar al usuario de la antigüedad de sus tareas. \\
+\hline
 recupero-password & Contiene la página que permite al usuario recuperar su password. \\
+\hline
 register & Contiene la página que permite dar de alta nuevos usuarios al sistema. \\
+\hline
 services & Contiene los servicios que utilizan las diferentes páginas y componentes para gestionar sus datos y consultas al backend. \\
 		\bottomrule
 		\hline
@@ -507,10 +531,10 @@ Los servicios implementados son los siguientes:
 \item tareaService: se comunica con el backend para obtener información de las tareas en curso, de las tareas cerradas y para realizar modificaciones en las mismas.
 \item tokenStorageService: es el encargado de la gestión del token de autenticación que devuelve el backend al iniciar sesión. Dentro de la gestión se incluye su almacenamiento y recuperación.
 \item usuariosService: se comunica con el backend para realizar cambios en el estado de los usuarios y sus roles. Solo es utilizado por el rol administrador. 
-\item loginGuardService: permite al módulo de ruteo de la aplicación controlar que el usuario cuente con el rol necesario para acceder a una determinada página. Este servicio se utiliza para habilitar los accesos a las páginas solo al rol de usuario normal.
-\item rolAdminGuardService: permite al módulo de ruteo de la aplicación controlar que el usuario cuente con el rol necesario para acceder a una determinada página. Este servicio se utiliza para habilitar los accesos a las páginas solo al rol de usuario administrador.
-\item rolAGerenteGuardService: permite al módulo de ruteo de la aplicación controlar que el usuario cuente con el rol necesario para acceder a una determinada página. Este servicio se utiliza para habilitar los accesos a las páginas solo al rol de usuario gerente.
-\item rolVigilanciaGuardService: permite al módulo de ruteo de la aplicación controlar que el usuario cuente con el rol necesario para acceder a una determinada página. Este servicio se utiliza para habilitar los accesos a las páginas solo al rol de usuario vigilancia.
+\item loginGuardService: permite al módulo de ruteo de la aplicación controlar que el usuario cuente con el rol necesario para acceder a una determinada página. Este servicio se utiliza para habilitar los accesos a las páginas solo para el rol de usuario normal.
+\item rolAdminGuardService: se utiliza para habilitar los accesos a las páginas solo para el rol de usuario administrador.
+\item rolAGerenteGuardService: se utiliza para habilitar los accesos a las páginas solo para el rol de usuario gerente.
+\item rolVigilanciaGuardService: se utiliza para habilitar los accesos a las páginas solo para el rol de usuario vigilancia.
 \end{itemize}
 
 \subsubsection{Funcionamiento del módulo ante un inicio de sesión}
@@ -571,10 +595,18 @@ A continuación, se muestran los pasos que realiza el sistema y los componentes 
 \item El módulo ``homeModule'' recibe el evento del backend y genera la alerta al vigilante. La misma se presenta en un \textit{Pop up} que se muestra durante 6 segundos e incluye los detalles del acceso. Para ver el detalle de cada tipo de acceso referirse a la sección \ref{sec:PruebasAceptacion}
 \end{enumerate}
 
+En la figura \ref{fig:DiagramaInteraccionVigi} se muestra el diagrama de interacción para la pantalla de principal de vigilancia.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{./Figures/DiagramaInteraccionVigi.png}
+	\caption{Diagrama de interacción para la pantalla de principal de vigilancia.}
+	\label{fig:DiagramaInteraccionVigi}
+\end{figure}
 
 \section{Interfaz con sistema de documentación}
 
-El sistema de documentación de terceros es un aplicativo que ya está desarrollado en la empresa. El acceso al mismo es a través de un \textit{endpoint} HTTP GET, al cual se le indica el id del usuario de tercero que se quiere consultar, y devuelve un objeto JSON con la información del nombre y apellido de la persona, si el acceso se debe permitir o no (variable con valor OK o NO) y el motivo por el cual se habilita o no a la mismo. Para configurar el acceso a dicho sistema dentro de nuestro desarrollo, bastó con contar con la dirección del \textit{endpoint}. 
+El sistema de documentación de terceros es un aplicativo que ya está desarrollado en la empresa. El acceso al mismo es a través de un \textit{endpoint} HTTP GET, al cual se le indica el id del usuario de tercero que se quiere consultar, y devuelve un objeto JSON con la información del nombre y apellido de la persona, si el acceso se debe permitir o no (variable con valor OK o NO) y el motivo por el cual se habilita o no al mismo. Para configurar el acceso a dicho sistema dentro de nuestro desarrollo, bastó con contar con la dirección del \textit{endpoint}. 
 
 Dado que el desarrollo y las pruebas se realizaron en un entorno desconectado de la empresa, se implementó un \textit{mock} para simular el acceso al sistema. Dicho \textit{mock} se desarrolló como una aplicación web con Node.JS y la librería Express, lo que permitió exponer un \textit{endpoint} HTTP GET del mismo modo que lo hace el sistema original. Para el desarrollo se utilizó el IDE Visual Studio Code y se tomaron 4 casos típicos como respuesta:
 

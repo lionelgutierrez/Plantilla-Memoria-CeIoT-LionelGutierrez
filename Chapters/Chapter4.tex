@@ -27,7 +27,7 @@ Para dar cuenta del proceso, en la tabla \ref{tab:tablaTiposPruebas}, se muestra
 
 \begin{table}[h]
 	\centering
-	\caption[Tipos de pruebas]{Tipos de pruebas realizadas sobre el sistema.}
+	\caption[Tipos de pruebas realizadas sobre el sistema]{Tipos de pruebas realizadas sobre el sistema.}
 	\begin{tabular}{p{3.0cm} p{5.5cm} p{4.0cm}} 	
 
 		\toprule
@@ -120,7 +120,7 @@ En la tabla \ref{tab:tablaTestNodSensor} se detalla el conjunto de casos de test
 
 \begin{table}[h]
 	\centering
-	\caption[Tipos de pruebas sensor]{Casos de test del módulo sensor.}
+	\caption[Casos de test del módulo sensor]{Casos de test del módulo sensor.}
 	\begin{tabular}{p{1.5cm} p{5.5cm} p{5.5cm}} 	
 
 		\toprule
@@ -169,7 +169,7 @@ En la figura \ref{fig:TestActuadorConfig} se muestra la configuración de Postma
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=0.9\textwidth]{./Figures/TestActuadorConfig.png}
+	\includegraphics[width=1\textwidth]{./Figures/TestActuadorConfig.png}
 	\caption{Configuración en Postman para el testeo del módulo actuador.}
 	\label{fig:TestActuadorConfig}
 \end{figure}
@@ -189,7 +189,7 @@ En la tabla  \ref{tab:tablaTestNodActuador} se detalla el conjunto de casos de t
 
 \begin{table}[h]
 	\centering
-	\caption[Tipos de pruebas actuador]{Casos de test del módulo actuador.}
+	\caption[Casos de test del módulo actuador]{Casos de test del módulo actuador.}
 	\begin{tabular}{p{1.5cm} p{6.5cm} p{4.5cm}} 	
 
 		\toprule
@@ -281,7 +281,7 @@ En la tabla  \ref{tab:tablaTestBackendSensor} se detalla el conjunto de casos de
 
 \begin{table}[h]
 	\centering
-	\caption[Tipos de pruebas backend]{Casos de test del módulo backend. Testing de recepción de los datos de los módulos sensores.}
+	\caption[Tipos de pruebas backend. Recepción de los datos de los módulos sensores]{Casos de test del módulo backend. Testing de recepción de los datos de los módulos sensores.}
 	\begin{tabular}{p{3.5cm} p{4.5cm} p{4cm}} 	
 
 		\toprule
@@ -308,7 +308,7 @@ En la tabla  \ref{tab:tablaTestBackendAutenticacion} se detalla el conjunto de c
 
 \begin{table}[h]
 	\centering
-	\caption[Tipos de pruebas backend]{Casos de test del módulo backend. Testing de la API de autenticación.}
+	\caption[Tipos de pruebas backend. Testing de la API de autenticación]{Casos de test del módulo backend. Testing de la API de autenticación.}
 	\begin{tabular}{p{3.5cm} p{4.5cm} p{4cm}} 	
 
 		\toprule
@@ -318,7 +318,7 @@ En la tabla  \ref{tab:tablaTestBackendAutenticacion} se detalla el conjunto de c
 		\\
 		\midrule
 \multirow{3}{3.5cm}{Autenticación e ingreso.} & Alta de usuario con username, email y password correcto (5). & Se confirma el alta del usuario con HTTP código 200. \\
-                    & Alta de usuario con username o email repetido (1 y2). & Se rechaza el alta. Respuesta HTTP con código 400 y mensaje de error. \\
+                    & Alta de usuario con username o email repetido (1 y 2). & Se rechaza el alta. Respuesta HTTP con código 400 y mensaje de error. \\
                     & Inicio de sesión con username o password incorrecto (3 y 4). & Se rechaza el inicio de sesión. Respuesta HTTP con código 401 y mensaje de error. \\
 		\bottomrule
 		\hline
@@ -331,7 +331,7 @@ En la tabla \ref{tab:tablaTestBackendFrontend} se detalla el conjunto de casos d
 
 \begin{table}[h]
 	\centering
-	\caption[Tipos de pruebas backend]{Casos de test del módulo backend. Testing de la API Rest expuesta al frontend.}
+	\caption[Tipos de pruebas backend. Testing de la API Rest]{Casos de test del módulo backend. Testing de la API Rest expuesta al frontend.}
 	\begin{tabular}{p{3.5cm} p{3.5cm} p{5cm}} 	
 
 		\toprule
@@ -379,7 +379,7 @@ En la tabla  \ref{tab:tablaTestsSistemaUsuNormal} se detalla el conjunto de caso
 
 \begin{table}[h]
 	\centering
-	\caption[Tipos de pruebas sistema]{Listado de pruebas realizadas para el rol de usuario normal.}
+	\caption[Tipos de pruebas sistema para el rol de usuario normal]{Listado de pruebas realizadas para el rol de usuario normal.}
 	\begin{tabular}{ p{3.5cm} p{2.5cm} p{7cm}}
 
 		\toprule
@@ -388,11 +388,11 @@ En la tabla  \ref{tab:tablaTestsSistemaUsuNormal} se detalla el conjunto de caso
 		\textbf{Resultados} 
 		\\
 		\midrule
-Mis tareas en curso  & Visualizar tareas.  & Se muestra el listado de tareas en curso del usuario o se indica que no tiene tareas en curso. \\
-Mis tareas en curso & Cerrar tarea.  & Se marca como completa la tarea del usuario y se muestra una alerta indicando que se cerró la tarea correctamente.  \\
-Mis tareas en curso & Ajustar observación en tarea.  & Se ajusta la observación en la tarea y se muestra una alerta indicando que se actualizó la observación correctamente. \\
-Mi historial tareas & Visualizar historial tareas de usuario. & Se muestra el listado de tareas cerradas del usuario o se indica que no tiene tareas cerradas. \\
-Mi perfil & Visualizar perfil. & Se muestra la información del usuario, incluyendo su \textit{username}, email, sector y roles asignados. \\
+Mis tareas en curso  & Visualizar tareas  & Se muestra el listado de tareas en curso del usuario o se indica que no tiene tareas en curso. \\
+Mis tareas en curso & Cerrar tarea  & Se marca como completa la tarea del usuario y se muestra una alerta indicando que se cerró la tarea correctamente.  \\
+Mis tareas en curso & Ajustar observación en tarea  & Se ajusta la observación en la tarea y se muestra una alerta indicando que se actualizó la observación correctamente. \\
+Mi historial tareas & Visualizar historial tareas de usuario & Se muestra el listado de tareas cerradas del usuario o se indica que no tiene tareas cerradas. \\
+Mi perfil & Visualizar perfil & Se muestra la información del usuario, incluyendo su \textit{username}, email, sector y roles asignados. \\
 
 		\bottomrule
 		\hline
@@ -405,7 +405,7 @@ En la tabla  \ref{tab:tablaTestsSistemaUsuAdmin} se detalla el conjunto de casos
 
 \begin{table}[h]
 	\centering
-	\caption[Tipos de pruebas sistema]{Listado de pruebas realizadas para el rol de usuario administrador.}
+	\caption[Tipos de pruebas sistema para el rol de usuario administrador]{Listado de pruebas realizadas para el rol de usuario administrador.}
 	\begin{tabular}{ p{3.5cm} p{2.5cm} p{7cm}} 	
 
 		\toprule
@@ -414,7 +414,7 @@ En la tabla  \ref{tab:tablaTestsSistemaUsuAdmin} se detalla el conjunto de casos
 		\textbf{Resultados} 
 		\\
 		\midrule
-Gestión usuarios & Modificar estado de rol de usuario.  & Se modifica el estado del rol del usuario en la base de datos y se muestra una alerta indicando que el cambio se realizó correctamente.  \\
+Gestión usuarios & Modificar estado de rol de usuario  & Se modifica el estado del rol del usuario en la base de datos y se muestra una alerta indicando que el cambio se realizó correctamente.  \\
 		\bottomrule
 		\hline
 	\end{tabular}
@@ -425,7 +425,7 @@ En la tabla  \ref{tab:tablaTestsSistemaUsuGerente} se detalla el conjunto de cas
 
 \begin{table}[h]
 	\centering
-	\caption[Tipos de pruebas sistema]{Listado de pruebas realizadas para el rol de usuario gerente.}
+	\caption[Tipos de pruebas sistema para el rol de usuario gerente]{Listado de pruebas realizadas para el rol de usuario gerente.}
 	\begin{tabular}{p{3.5cm} p{2.5cm} p{7cm}}
 
 		\toprule
@@ -434,11 +434,11 @@ En la tabla  \ref{tab:tablaTestsSistemaUsuGerente} se detalla el conjunto de cas
 		\textbf{Resultados} 
 		\\
 		\midrule
-Estadísticas ingresos & Visualizar ingresos del mes.  & Se muestra un gráfico de barras con la cantidad de ingresos de cada día del mes especificado (ingresos ok y no ok) y un gráfico de torta con el total de ingresos ok y no ok del mes.  \\
-Estadísticas tareas & Visualizar estadísticas de tareas.  & Se muestra un gráfico de torta con la cantidad de tareas en curso, un gráfico de barras con la cantidad de tareas cerradas por cada mes del año y un gráfico de torta con el total de tareas completas del año.  \\
-Tareas en curso & Visualizar tareas en curso.
+Estadísticas ingresos & Visualizar ingresos del mes  & Se muestra un gráfico de barras con la cantidad de ingresos de cada día del mes especificado (ingresos ok y no ok) y un gráfico de torta con el total de ingresos ok y no ok del mes.  \\
+Estadísticas tareas & Visualizar estadísticas de tareas  & Se muestra un gráfico de torta con la cantidad de tareas en curso, un gráfico de barras con la cantidad de tareas cerradas por cada mes del año y un gráfico de torta con el total de tareas completas del año.  \\
+Tareas en curso & Visualizar tareas en curso
   & Se muestra el listado de tareas en curso, junto a información de antigüedad, estado, fecha de inicio y detalle de las sub-tarea de cada sector.  \\
-Ingresos del día & Visualizar ingresos del día.  & Se muestra el listado de los ingresos, junto a información de horario, si el ingreso fue permitido o no y el detalle de la habilitación o rechazo junto al nombre del tercero.  \\
+Ingresos del día & Visualizar ingresos del día  & Se muestra el listado de los ingresos, junto a información de horario, si el ingreso fue permitido o no y el detalle de la habilitación o rechazo junto al nombre del tercero.  \\
 
 		\bottomrule
 		\hline
@@ -450,7 +450,7 @@ En la tabla  \ref{tab:tablaTestsSistemaUsuPorteria} se detalla el conjunto de ca
 
 \begin{table}[h]
 	\centering
-	\caption[Tipos de pruebas sistema]{Listado de pruebas realizadas para el rol de usuario vigilante.}
+	\caption[Tipos de pruebas sistema para el rol de usuario vigilante]{Listado de pruebas realizadas para el rol de usuario vigilante.}
 	\begin{tabular}{p{3.5cm} p{2.5cm} p{7cm}}
 
 		\toprule
@@ -459,7 +459,7 @@ En la tabla  \ref{tab:tablaTestsSistemaUsuPorteria} se detalla el conjunto de ca
 		\textbf{Resultados} 
 		\\
 		\midrule
-Pantalla principal & Visualizar ingreso en portería.  & Cuando un tercero pretende ingresar en planta, se muestra en la pantalla principal una alerta, indicando el intento de acceso y si el mismo se permitió o se rechazó, junto a un color particular para diferenciar ambos casos. La alerta se muestra por 6 segundos. \\
+Pantalla principal & Visualizar ingreso en portería  & Cuando un tercero pretende ingresar en planta, se muestra en la pantalla principal una alerta, indicando el intento de acceso y si el mismo se permitió o se rechazó, junto a un color particular para diferenciar ambos casos. La alerta se muestra por 6 segundos. \\
 		\bottomrule
 		\hline
 	\end{tabular}
@@ -594,7 +594,7 @@ En la tabla \ref{tab:comparacionfinal} se muestra la comparación entre el siste
 
 \begin{table}[h]
 	\centering
-	\caption[Comparación soluciones]{Comparación contra otras soluciones similares del mercado.}
+	\caption[Comparación contra otras soluciones similares del mercado]{Comparación contra otras soluciones similares del mercado.}
 	\begin{tabular}{l c c c}   
 		\toprule
 		\textbf{Característica} & 
